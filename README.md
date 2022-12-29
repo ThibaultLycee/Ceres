@@ -111,6 +111,4 @@ typedef uint32_t Color32;	// A king of wrapper for the 32-bits colors
 
 Ceres also defines the following functions
 
-### ```c
-void Ceres_FillPixels(Color32* pixels, size_t size, Color32 color);
-```
+### ```c void Ceres_FillPixels(Color32* pixels, size_t size, Color32 color);```
