@@ -2,7 +2,9 @@
 
 [Ceres](https://en.wikipedia.org/wiki/Ceres_(mythology))
 
-In ancient Roman religion, Ceres (/ˈsɪəriːz/ SEER-eez,[1][2] Latin: [ˈkɛreːs]) was a goddess of agriculture, grain crops, fertility and motherly relationships.[3] She was originally the central deity in Rome's so-called plebeian or Aventine Triad, then was paired with her daughter Proserpina in what Romans described as "the Greek rites of Ceres". Her seven-day April festival of Cerealia included the popular Ludi Ceriales (Ceres' games). She was also honoured in the May lustratio of the fields at the Ambarvalia festival, at harvest-time, and during Roman marriages and funeral rites. She is usually depicted as a mature woman. 
+In ancient Roman religion, Ceres (/ˈsɪəriːz/ SEER-eez, Latin: [ˈkɛreːs]) was a goddess of agriculture, grain crops, fertility and motherly relationships.[3] She was originally the central deity in Rome's so-called plebeian or Aventine Triad, then was paired with her daughter Proserpina in what Romans described as "the Greek rites of Ceres". Her seven-day April festival of Cerealia included the popular Ludi Ceriales (Ceres' games). She was also honoured in the May lustratio of the fields at the Ambarvalia festival, at harvest-time, and during Roman marriages and funeral rites. She is usually depicted as a mature woman. 
+
+Ceres is a simple graphics library I'm writting fully in C.
 
 ## Instalation
 
@@ -92,11 +94,23 @@ Some other macros are defined to make writting Ceres easier. They are the follow
  - `MAX(a, b)`			: evaluates to `(a < b ? b : a)`
  - `MIN(a, b)` 			: evaluates to `(a < b ? a : b)`
  - `SQR(a)`			: evaluates to `((a) * (a))`
- - `SQRT_DIST(x1, y1, x2, y2)`	: avaluates to `(SQR(x1 - x2) + SQR(y1 - y2))`
+ - `SQRT_DIST(x1, y1, x2, y2)`	: evaluates to `(SQR(x1 - x2) + SQR(y1 - y2))`
 
 ### Other tags
 
 By default, Ceres will define these tags :
  - `INCLUDE_CERES`	: makes sure to only include Ceres once when compiling
 
+## Actual code usage
 
+Ceres defines the following typedefs:
+
+```c
+typedef uint32_t Color32;	// A king of wrapper for the 32-bits colors
+```
+
+Ceres also defines the following functions
+
+### ```c
+void Ceres_FillPixels(Color32* pixels, size_t size, Color32 color);
+```

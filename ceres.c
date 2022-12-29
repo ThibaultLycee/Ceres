@@ -4,17 +4,20 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#ifndef CERES_COLORS
+#define CERES_COLORS
 #define C_WHITE 0xFFFFFFFF
 #define C_BLACK 0xFF000000
 #define C_BLUE  0xFFFF0000
 #define C_GREEN 0xFF00FF00
 #define C_RED   0xFF0000FF
+#endif
 
 #define CERES_TRUE 1
 #define CERES_FALSE 0
 
-#ifndef OUTPUT_FILE
-#define OUTPUT_FILE "output.ppm"
+#ifndef CERES_OUTPUT_FILE
+#define CERES_OUTPUT_FILE "output.ppm"
 #endif
 
 #define MAX(a, b) (a < b ? b : a)
@@ -24,8 +27,8 @@
 
 typedef uint32_t Color32;
 
-void Ceres_FillPixels(Color32* pixels, int size, Color32 color) {
-	for (int i = 0; i < size; ++i) {
+void Ceres_FillPixels(Color32* pixels, size_t size, Color32 color) {
+	for (size_t i = 0; i < size; ++i) {
 		pixels[i] = color;
 	}
 }
@@ -66,7 +69,7 @@ void Ceres_FillCircle(Color32* pixels,
 }
 
 int Ceres_SavePpm(Color32* pixels, int width, int height) {
-	FILE* fp = fopen(OUTPUT_FILE, "wb");
+	FILE* fp = fopen(CERES_OUTPUT_FILE, "wb");
 	if (fp == NULL) return 1;
 
 	fprintf(fp, "P6\n%d %d 255\n", width, height);
