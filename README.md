@@ -103,12 +103,12 @@ By default, Ceres will define these tags :
 
 ## Actual code usage
 
-Ceres defines the following typedefs:
-
+First, know that Ceres, for it's ease of use, defines a few things :
 ```c
-typedef uint32_t Color32;	// A king of wrapper for the 32-bits colors
+typedef uint32_t Color32; // Represents a 32-bits color
 ```
 
-Ceres also defines the following functions
+Ceres is used as such :
+ - first, create an array of `Color32` with known width and height.
+ - then, when using a function in Ceres, start by giving it a pointer to said array, and it's width and height
 
-### ```c void Ceres_FillPixels(Color32* pixels, size_t size, Color32 color);```

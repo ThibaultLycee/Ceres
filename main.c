@@ -3,8 +3,8 @@
 
 #include "ceres.c"
 
-#define WIDTH 25
-#define HEIGHT 25
+#define WIDTH 50
+#define HEIGHT 50
 
 #define IMG_SIZE (WIDTH * HEIGHT)
 
@@ -12,8 +12,10 @@ static Color32 pixels[IMG_SIZE];
 
 int main(void) {
 	Ceres_FillPixels(pixels, IMG_SIZE, C_WHITE);
-
-	Ceres_FillCircle(pixels, WIDTH, HEIGHT, 9, 9, 13, C_GREEN);
+	
+	Ceres_FillRect(pixels, STD_WIDTH, STD_HEIGHT, 1, 1, 48, 48, C_RED);
+	Ceres_FillRect(pixels, STD_WIDTH, STD_HEIGHT, -2, 6, 9, 21, C_GREEN);
+	Ceres_FillRect(pixels, STD_WIDTH, STD_HEIGHT, 3, 3, 12, 75, C_BLUE);
 
 	Ceres_SavePpm(pixels, WIDTH, HEIGHT);
 	return 0;
