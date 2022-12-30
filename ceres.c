@@ -6,11 +6,13 @@
 
 #ifndef CERES_COLORS
 #define CERES_COLORS
-#define C_WHITE 0xFFFFFFFF
-#define C_BLACK 0xFF000000
-#define C_BLUE  0xFFFF0000
-#define C_GREEN 0xFF00FF00
-#define C_RED   0xFF0000FF
+#define C_WHITE 	0xFFFFFFFF
+#define C_BLACK 	0xFF000000
+#define C_BLUE  	0xFFFF0000
+#define C_GREEN 	0xFF00FF00
+#define C_RED   	0xFF0000FF
+#define C_GRAY  	0xFF181818
+#define C_YELLOW	0xFF00BBFF
 #endif
 
 #define CERES_TRUE 1

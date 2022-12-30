@@ -68,7 +68,7 @@ This macro allows you to overwrite defaults Ceres colors. Default colors are :
  - `C_GREEN`	: `0xFF00FF00`
  - `C_BLUE`	: `0xFFFF0000`
 
-These values are of the form `0xAABBGGRR`, and are calculated for litle-endian computers, so if you want to redefine them, be aware of your machine's endianess. If you are using big-endian (you're most likely not), then redefine the colors in this format : `1xRRGGBBAA`.
+These values are of the form `0xAABBGGRR`, and are calculated for litle-endian computers, so if you want to redefine them, be aware of your machine's endianess. If you are using big-endian (you're most likely not), then redefine the colors in this format : `0xRRGGBBAA`.
 
 Example :
 ```c
