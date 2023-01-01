@@ -34,9 +34,19 @@ void test_Ceres_FillCircle(Color32* pixels) {
 	Ceres_FillCircle(pixels, STD_WIDTH, STD_HEIGHT, 51, 31, 6, C_GREEN);
 }
 
+void test_Ceres_FillFrom(Color32* pixels) {
+	Ceres_FillRect(pixels, STD_WIDTH, STD_HEIGHT, 1, 1, 48, 1, C_RED);
+	Ceres_FillRect(pixels, STD_WIDTH, STD_HEIGHT, 1, 1, 1, 48, C_RED);
+	Ceres_FillRect(pixels, STD_WIDTH, STD_HEIGHT, 1, 48, 48, 1, C_RED);
+	Ceres_FillRect(pixels, STD_WIDTH, STD_HEIGHT, 48, 1, 1, 48, C_RED);
+
+	Ceres_FillFrom(pixels, STD_WIDTH, STD_HEIGHT, 25, 25, C_RED);
+}
+
 static Test_Case tests[] = {
 	MAKE_CASE(Ceres_FillRect),
 	MAKE_CASE(Ceres_FillCircle),
+	MAKE_CASE(Ceres_FillFrom),
 };
 
 #define TESTS_COUNT (sizeof(tests) / sizeof(Test_Case))

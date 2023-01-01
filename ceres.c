@@ -70,6 +70,31 @@ void Ceres_FillCircle(Color32* pixels,
 	}
 }
 
+void Ceres_FillFrom(Color32* pixels,
+		int width, int height,
+		int x, int y, Color32 color) {
+	typedef struct {
+		int x;
+		int y;
+	} Coord;
+	Coord neighbours[] = {
+		{x, y-1},
+		{x, y+1},
+		{x-1, y},
+		{x+1, y},
+	};
+
+	if (x >= 0 && x < width
+			&& y >= 0 && y < width
+			&& pixels[y * width + x] != color) {
+		pixels[y * width + x] = color;
+		for (size_t i = 0; i < 4; ++i) {
+			Coord here = neighbours[i];
+			Ceres_FillFrom(pixels, width, height, here.x, here.y, color);
+		}
+	}
+}
+
 int Ceres_SavePpm(Color32* pixels, int width, int height) {
 	FILE* fp = fopen(CERES_OUTPUT_FILE, "wb");
 	if (fp == NULL) return 1;
