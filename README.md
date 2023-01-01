@@ -91,10 +91,13 @@ int main(void) {
 ### Other macros
 
 Some other macros are defined to make writting Ceres easier. They are the following :
- - `MAX(a, b)`			: evaluates to `(a < b ? b : a)`
- - `MIN(a, b)` 			: evaluates to `(a < b ? a : b)`
- - `SQR(a)`			: evaluates to `((a) * (a))`
- - `SQRT_DIST(x1, y1, x2, y2)`	: evaluates to `(SQR(x1 - x2) + SQR(y1 - y2))`
+
+```c
+#define MAX(a, b) (a < b ? b : a)
+#define MIN(a, b) (a < b ? a : b)
+#define SQR(a) ((a) * (a))
+#define SQRT_DIST(x1, y1, x2, y2) (SQR(x1 - x2) + SQR(y1 - y2))
+```
 
 ### Other tags
 
