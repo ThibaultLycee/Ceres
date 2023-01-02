@@ -22,10 +22,12 @@
 #define CERES_OUTPUT_FILE "output.ppm"
 #endif
 
-#define MAX(a, b) (a < b ? b : a)
-#define MIN(a, b) (a < b ? a : b)
-#define SQR(a) ((a) * (a))
-#define SQRT_DIST(x1, y1, x2, y2) (SQR(x1 - x2) + SQR(y1 - y2))
+#define CERES_MAX(a, b) (a < b ? b : a)
+#define CERES_MIN(a, b) (a < b ? a : b)
+#define CERES_SQR(a) ((a) * (a))
+#define CERES_SQRT_DIST(x1, y1, x2, y2) (CERES_SQR(x1 - x2) + CERES_SQR(y1 - y2))
+#define CERES_SIGNOF(x) (x < 0 ? -1 : 1)
+#define CERES_ABS(x) (CERES_SIGNOF(x) * x)
 
 typedef uint32_t Color32;
 
@@ -40,10 +42,10 @@ void Ceres_FillRect(Color32* pixels,
 		int x, int y,
 		int w, int h,
 		Color32 color) {
-	int x0 = MIN(MAX(0, x), img_w);
-	int x1 = MIN(MAX(0, x + w), img_w);
-	int y0 = MIN(MAX(0, y), img_h);
-	int y1 = MIN(MAX(0, y + h), img_h);
+	int x0 = CERES_MIN(CERES_MAX(0, x), img_w);
+	int x1 = CERES_MIN(CERES_MAX(0, x + w), img_w);
+	int y0 = CERES_MIN(CERES_MAX(0, y), img_h);
+	int y1 = CERES_MIN(CERES_MAX(0, y + h), img_h);
 
 	for (int i = x0; i < x1; ++i) {
 		for (int j = y0; j < y1; ++j) {
@@ -57,14 +59,14 @@ void Ceres_FillCircle(Color32* pixels,
 		int x, int y,
 		int radius,
 		Color32 color) {
-	int x0 = MIN(MAX(0, x - radius), width);
-	int y0 = MIN(MAX(0, y - radius), height);
-	int x1 = MIN(MAX(0, x + radius), width);
-	int y1 = MIN(MAX(0, y + radius), height);
+	int x0 = CERES_MIN(CERES_MAX(0, x - radius), width);
+	int y0 = CERES_MIN(CERES_MAX(0, y - radius), height);
+	int x1 = CERES_MIN(CERES_MAX(0, x + radius), width);
+	int y1 = CERES_MIN(CERES_MAX(0, y + radius), height);
 
 	for (int i = x0; i < x1; ++i) {
 		for (int j = y0; j < y1; ++j) {
-			if (SQRT_DIST(i, j, x, y) <= radius * radius)
+			if (CERES_SQRT_DIST(i, j, x, y) <= radius * radius)
 				pixels[j * width + i] = color;
 		}
 	}
@@ -93,6 +95,36 @@ void Ceres_FillFrom(Color32* pixels,
 			Ceres_FillFrom(pixels, width, height, here.x, here.y, color);
 		}
 	}
+}
+
+void Ceres_Line(Color32* pixels,
+		int width, int height,
+		int x1, int y1,
+		int x2, int y2,
+		Color32 color) {
+	int dx = x2 - x1;
+	int dy = y2 - y1;
+
+	if (dx == 0 && dy == 0) return;
+
+	if (CERES_ABS(dx) > CERES_ABS(dy)) {
+		float slope = (float) CERES_ABS(dy) / CERES_ABS(dx);
+		for (int i = 0; i <= dx; ++i) {
+			int x = x1 + i;
+			int y = slope * i + x1;
+			if (x >= 0 && y >= 0 && x < width && y < height)
+				pixels[y * width + x] = color;
+		}
+	} else {
+		float slope = CERES_ABS(dx) / CERES_ABS(dy);
+		for (int i = 0; i <= dy; ++i) {
+			int y = y1 + i;
+			int x = x1 + i * slope;
+			if (x >= 0 && y >= 0 && x < width && y < height)
+				pixels[y * width + x] = color;
+		}
+	}
+
 }
 
 int Ceres_SavePpm(Color32* pixels, int width, int height) {
