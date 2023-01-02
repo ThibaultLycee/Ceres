@@ -10,13 +10,13 @@ Ceres is a simple graphics library I'm writting fully in C.
 
 In case you already have git installed :
 
- - in a new folder, type `git clone https://github.com/ThibaultLycee/Ceres.git`
- - `cd` in Ceres and run `./build.sh`
+ - in a new folder, type `$ git clone https://github.com/ThibaultLycee/Ceres.git`
+ - `$ cd` in Ceres and run `$ ./build.sh`
 
 If you do not use git :
  - download the projet from github
  - unzip your download
- - run `./build.sh` in the folder
+ - run `$ ./build.sh` in the folder
 
 ## Usage
 
@@ -62,11 +62,13 @@ int main(void) {
 ### CERES\_COLORS
 
 This macro allows you to overwrite defaults Ceres colors. Default colors are :
- - `C_WHITE` 	: `0xFFFFFFFF`
- - `C_BLACK` 	: `0xFF000000`
- - `C_RED`	: `0xFF0000FF`
- - `C_GREEN`	: `0xFF00FF00`
- - `C_BLUE`	: `0xFFFF0000`
+```c
+#define C_WHITE 0xFFFFFFFF
+#define C_BLACK 0xFF000000
+#define C_RED   0xFF0000FF
+#define C_GREEN 0xFf00FF00
+#define C_BLUE  0xFFFF0000
+```
 
 These values are of the form `0xAABBGGRR`, and are calculated for litle-endian computers, so if you want to redefine them, be aware of your machine's endianess. If you are using big-endian (you're most likely not), then redefine the colors in this format : `0xRRGGBBAA`.
 
@@ -75,10 +77,10 @@ Example :
 #define CERES_COLORS
 #define C_WHITE 0xFF000000 // Technically, this is black, but it's an exemple
 #define C_BLACK 0xFFFFFFFF // And this is white
-#define C_RED 0xFF0000FF
+#define C_RED   0xFF0000FF
 #define C_GREEN 0xFF00FF00
-#define C_BLUE 0xFFFF0000
-#define C_BG 0xFF181818 // You can add any color you want (you don't need to overwrite the CERES_COLORS macro for this)
+#define C_BLUE  0xFFFF0000
+#define C_BG    0xFF181818 // You can add any color you want (you don't need to overwrite the CERES_COLORS macro for this)
 
 #include "ceres.c"
 
@@ -93,10 +95,17 @@ int main(void) {
 Some other macros are defined to make writting Ceres easier. They are the following :
 
 ```c
-#define MAX(a, b) (a < b ? b : a)
-#define MIN(a, b) (a < b ? a : b)
-#define SQR(a) ((a) * (a))
-#define SQRT_DIST(x1, y1, x2, y2) (SQR(x1 - x2) + SQR(y1 - y2))
+// Basic math function
+#define CERES_MAX(a, b) 		(a < b ? b : a)
+#define CERES_MIN(a, b) 		(a < b ? a : b)
+#define CERES_SQR(a) 			((a) * (a))
+#define CERES_SQRT_DIST(x1, y1, x2, y2)	(CERES_SQR(x1 - x2) + CERES_SQR(y1 - y2))
+#define CERES_SIGNOF(x) 		(x < 0 ? -1 : 1)
+#define CERES_ABS(x) 			(CERES_SIGNOF(x) * x)
+
+// This is to avoid using stdbool.h
+#define CERES_TRUE  1
+#define CERES_FALSE 0
 ```
 
 ### Other tags
