@@ -1,11 +1,11 @@
 #!/bin/sh -x
 
-rm ./build/ceres
-rm ./build/tests
+rm ./comp/ceres
+rm ./comp/tests
 
 rm ./tests_out/diff/*
 
-gcc -Wall -Wextra ./main.c -o ./build/ceres
-gcc -Wall -Wextra ./tests.c -o ./build/tests
+gcc -Wall -Wextra ./main.c -o ./comp/ceres
+gcc -Wall -Wextra ./tests.c -o ./comp/tests
 
-./build/tests run
+./comp/tests run
