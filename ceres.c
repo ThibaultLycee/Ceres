@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "ceres_math.c"
+
 #ifndef CERES_COLORS
 #define CERES_COLORS
 #define C_WHITE 	0xFFFFFFFF
@@ -21,13 +23,6 @@
 #ifndef CERES_OUTPUT_FILE
 #define CERES_OUTPUT_FILE "output.ppm"
 #endif
-
-#define CERES_MAX(a, b) (a < b ? b : a)
-#define CERES_MIN(a, b) (a < b ? a : b)
-#define CERES_SQR(a) ((a) * (a))
-#define CERES_SQRT_DIST(x1, y1, x2, y2) (CERES_SQR(x1 - x2) + CERES_SQR(y1 - y2))
-#define CERES_SIGNOF(x) (x < 0 ? -1 : 1)
-#define CERES_ABS(x) (CERES_SIGNOF(x) * x)
 
 typedef uint32_t Color32;
 
@@ -75,6 +70,8 @@ void Ceres_FillCircle(Color32* pixels,
 void Ceres_FillFrom(Color32* pixels,
 		int width, int height,
 		int x, int y, Color32 color) {
+	if (pixels[y * width + x] == color) return;
+	
 	typedef struct {
 		int x;
 		int y;
@@ -87,8 +84,7 @@ void Ceres_FillFrom(Color32* pixels,
 	};
 
 	if (x >= 0 && x < width
-			&& y >= 0 && y < width
-			&& pixels[y * width + x] != color) {
+			&& y >= 0 && y < width) {
 		pixels[y * width + x] = color;
 		for (size_t i = 0; i < 4; ++i) {
 			Coord here = neighbours[i];
@@ -125,6 +121,32 @@ void Ceres_Line(Color32* pixels,
 		}
 	}
 
+}
+
+
+// TODO Finish implementing
+// A, B, C
+// P1 = lerp(A, B)
+// P2 = lerp(B, C)
+// F = lerp(P1, P2)
+void Ceres_Bezier2(Color32* pixels,
+		int width, int height,
+		int x1, int y1,
+		int x2, int y2,
+		int x3, int y3,
+		Color32 color) {
+	for (size_t t = 0; t < 100000; ++t) {
+		int px1 = __CeresMath_Lerp(x1, x2, (float) t / 100000);
+		int px2 = __CeresMath_Lerp(x2, x3, (float) t / 100000);
+		int py1 = __CeresMath_Lerp(y1, y2, (float) t / 100000);
+		int py2 = __CeresMath_Lerp(y2, y3, (float) t / 100000);
+		
+		int x = __CeresMath_Lerp(px1, px2, (float) t / 100000);
+		int y = __CeresMath_Lerp(py1, py2, (float) t / 100000);
+
+		if (x >= 0 && x < width && y >= 0 && y < height)
+			pixels[y * width + x] = color;
+	}
 }
 
 int Ceres_SavePpm(Color32* pixels, int width, int height) {

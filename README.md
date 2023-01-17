@@ -2,7 +2,7 @@
 
 [Ceres](https://en.wikipedia.org/wiki/Ceres_(mythology))
 
-In ancient Roman religion, Ceres (/ˈsɪəriːz/ SEER-eez, Latin: [ˈkɛreːs]) was a goddess of agriculture, grain crops, fertility and motherly relationships.[3] She was originally the central deity in Rome's so-called plebeian or Aventine Triad, then was paired with her daughter Proserpina in what Romans described as "the Greek rites of Ceres". Her seven-day April festival of Cerealia included the popular Ludi Ceriales (Ceres' games). She was also honoured in the May lustratio of the fields at the Ambarvalia festival, at harvest-time, and during Roman marriages and funeral rites. She is usually depicted as a mature woman. 
+In ancient Roman religion, Ceres (/ˈsɪəriːz/ SEER-eez, Latin: [ˈkɛreːs]) was a goddess of agriculture, grain crops, fertility and motherly relationships. She was originally the central deity in Rome's so-called plebeian or Aventine Triad, then was paired with her daughter Proserpina in what Romans described as "the Greek rites of Ceres". Her seven-day April festival of Cerealia included the popular Ludi Ceriales (Ceres' games). She was also honoured in the May lustratio of the fields at the Ambarvalia festival, at harvest-time, and during Roman marriages and funeral rites. She is usually depicted as a mature woman. 
 
 Ceres is a simple graphics library I'm writting fully in C.
 

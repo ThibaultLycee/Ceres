@@ -13,10 +13,10 @@ static Color32 pixels[IMG_SIZE];
 int main(void) {
 	Ceres_FillPixels(pixels, IMG_SIZE, C_WHITE);
 
-	Ceres_Line(pixels, WIDTH, HEIGHT, 1, 1, 48, 48, C_BLACK);
-	Ceres_Line(pixels, WIDTH, HEIGHT, 1, 1, 1, 48, C_RED);
-	Ceres_Line(pixels, WIDTH, HEIGHT, -2, -3, 21, 7, C_BLUE);
-	Ceres_Line(pixels, WIDTH, HEIGHT, 1, 1, 21, 7, C_GREEN);
+	pixels[20 * WIDTH + 5] = C_RED;
+	pixels[10 * WIDTH + 15] = C_RED;
+	pixels[30 * WIDTH + 45] = C_RED;
+	Ceres_Bezier2(pixels, WIDTH, HEIGHT, 5, 20, 15, 10, 45, 30, C_BLACK);
 
 	Ceres_SavePpm(pixels, WIDTH, HEIGHT);
 	return 0;
