@@ -1,11 +1,17 @@
 #!/bin/sh -x
 
-rm ./comp/ceres
-rm ./comp/tests
+OUT="./comp"
+
+if [ !-d "$OUT" ]; then
+	mkdir $OUT
+fi
+
+rm $OUT/ceres
+rm $OUT/tests
 
 rm ./tests_out/diff/*
 
-gcc -Wall -Wextra ./main.c -o ./comp/ceres
-gcc -Wall -Wextra ./tests.c -o ./comp/tests
+gcc -Wall -Wextra ./main.c -o $OUT/ceres
+gcc -Wall -Wextra ./tests.c -o $OUT/tests
 
-./comp/tests run
+$OUT/tests run

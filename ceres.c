@@ -124,11 +124,6 @@ void Ceres_Line(Color32* pixels,
 }
 
 
-// TODO Finish implementing
-// A, B, C
-// P1 = lerp(A, B)
-// P2 = lerp(B, C)
-// F = lerp(P1, P2)
 void Ceres_Bezier2(Color32* pixels,
 		int width, int height,
 		int x1, int y1,
