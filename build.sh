@@ -2,7 +2,7 @@
 
 OUT="./comp"
 
-if [ !-d "$OUT" ]; then
+if [ !-d "$OUT" ] ; then
 	mkdir $OUT
 fi
 

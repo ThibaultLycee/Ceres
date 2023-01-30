@@ -11,7 +11,7 @@
 #define CERES_ABS(x) (CERES_SIGNOF(x) * x)
 
 #ifdef CERES_MATH_USE
-#define lerp	__CeresMath_Lerp
+#define Ceres_Lerp	__CeresMath_Lerp
 #endif
 
 float __CeresMath_Lerp(int x1, int x2, float t) {
