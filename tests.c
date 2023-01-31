@@ -50,11 +50,16 @@ void test_Ceres_Line(Color32* pixels) {
 	Ceres_Line(pixels, STD_WIDTH, STD_HEIGHT, 1, 1, 21, 7, C_GREEN);
 }
 
+void test_Ceres_Bezier2(Color32* pixels) {
+	Ceres_Bezier2(pixels, STD_WIDTH, STD_HEIGHT, 2, 2, 35, 36, 10, 5, C_BLACK);
+}
+
 static Test_Case tests[] = {
 	MAKE_CASE(Ceres_FillRect),
 	MAKE_CASE(Ceres_FillCircle),
 	MAKE_CASE(Ceres_FillFrom),
 	MAKE_CASE(Ceres_Line),
+	MAKE_CASE(Ceres_Bezier2),
 };
 
 #define TESTS_COUNT (sizeof(tests) / sizeof(Test_Case))
